@@ -1,1 +1,44 @@
-<p>home works!</p>
+<h1 class="mt-4 font-bold">home Page</h1>
+
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class=" w-full bg-gray-300 py-2 px-2 flex ">
+        {{Date}}
+    </div>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Nom
+                </th>
+                <th scope="col" class="px-6 py-3">
+                   Prenom
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Date Naissance
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Télephone
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{Nom}}
+                </th>
+                <td class="px-6 py-4">
+                    {{Prenom}}
+                </td>
+                <td class="px-6 py-4">
+                    {{Date_naissance}}
+                </td>
+                <td class="px-6 py-4">
+                    {{Tel}}
+                </td>
+                
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
