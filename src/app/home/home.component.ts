@@ -31,6 +31,7 @@ export class HomeComponent {
     }
   ];
   removeContact(i: number): void {
-    console.log('Index of contact to remove:', i);
+    this.users.splice(i,1);
+    console.log('contact is deleted successfuly');
   }
 }
