@@ -1,38 +1,19 @@
 import { Injectable } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-
-  constructor() { }
-  getContact(): { Nom: string, Prenom: string, Tel: string, Date_naissance: Date, Status: string }[] {
-    var users = [
-      {
-        Nom: "yassine",
-        Prenom: "ahmed",
-        Tel: "1234567890",
-        Date_naissance: new Date(2002, 1, 1),
-        Status: 'active'
-      },
-      {
-        Nom: "Jane",
-        Prenom: "Doe",
-        Tel: "0987654321",
-        Date_naissance: new Date(1998, 5, 10),
-        Status: 'inactive'
-      },
-      {
-        Nom: "Bob",
-        Prenom: "Smith",
-        Tel: "5555555555",
-        Date_naissance: new Date(1985, 8, 30),
-        Status: 'active'
-      }
-    ];
   
-    return users;
+  private apiUrl = 'http://127.0.0.1:8000/';
+
+  constructor(private http: HttpClient) { }
+
+  getContacts(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
+
   getData(): string {
     return 'Hello, world!';
   } 

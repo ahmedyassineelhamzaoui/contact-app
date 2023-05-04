@@ -20,16 +20,16 @@
                 <th scope="col" class="px-6 py-3">
                     Télephone
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <!-- <th scope="col" class="px-6 py-3">
                     Status
-                </th>
+                </th> -->
                 <th scope="col" class="px-6 py-3">
                     Action
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users;let i = index" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+            <tr *ngFor="let user of contacts;let i = index" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{user.Nom | uppercase}}
                 </th>
@@ -42,15 +42,14 @@
                 <td class="px-6 py-4">
                     {{user.Tel}}
                 </td>
-                <td *ngIf="user.Status == 'active';else inactive" class="px-6 py-4">
-                    active
-                    
+                <!-- <td *ngIf="user.Status == 'active';else inactive" class="px-6 py-4">
+                   <span class="px-2 py-2 bg-green-500 text-white hover:bg-green-600 rounded-md">active</span> 
                 </td>
                 <ng-template #inactive>
                     <td class="px-6 py-4">
-                        en attend
+                        <span class="px-2 py-2 bg-red-500 text-white hover:bg-red-600 rounded-md">en attend</span>
                     </td>
-                </ng-template>
+                </ng-template> -->
                 <td class="px-6 py-4">
                     <button (click)="removeContact(i)" class="text-white rounded-md bg-red-600 px-1 py-1">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

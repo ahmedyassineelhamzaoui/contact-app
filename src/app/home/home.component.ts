@@ -7,12 +7,18 @@ import { ContactService } from '../contact.service';
 })
 export class HomeComponent {
   Date : Date = new Date();
-  users: { Nom: string, Prenom: string, Tel: string, Date_naissance: Date, Status: string }[];
-   constructor(private contactService: ContactService) {
-    this.users = contactService.getContact();
+  contacts: any[] = [];
+
+  constructor(private contactService: ContactService) { }
+
+  ngOnInit() {
+    this.contactService.getContacts()
+      .subscribe((response) => {
+        this.contacts = response.contacts;
+      });
   }
   removeContact(i: number): void {
-    this.users.splice(i,1);
+    this.contacts.splice(i,1);
     console.log('contact is deleted successfuly');
   }
 
