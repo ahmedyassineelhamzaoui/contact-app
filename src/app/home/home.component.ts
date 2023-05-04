@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ContactService } from '../contact.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
