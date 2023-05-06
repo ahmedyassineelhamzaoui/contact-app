@@ -22,6 +22,10 @@ export class ContactService {
   updateContact(editContact: Contact,index : number): Observable<any>{
     return this.http.put<any>(this.apiUrl + `/updateContact?id=${index}`, editContact).pipe(catchError(this.handlError));
   }
+  removeContact(index:number): Observable<any>{
+    return this.http.delete<any>(this.apiUrl + `/deleteContact?id=${index}`).pipe(catchError(this.handlError));
+  }
+  
   handlError(error:HttpErrorResponse){
     let errorMessage = '';
     if(error.error instanceof ErrorEvent){

@@ -12,28 +12,33 @@ export class HomeComponent {
   contacts: any[] = [];
   contactToEdit : Contact = new Contact(); 
   editIndex : number = -1 ;
+  deleteIndex : number =-1 ;
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
     this.contactService.getContacts()
       .subscribe((response) => {
         this.contacts = response.contacts;
+        console.log(response.contacts);
       });
   }
-  removeContact(i: number): void {
-    this.contacts.splice(i,1);
-    console.log('contact is deleted successfuly');
-  }
+
 
   editContact(index : number){
     const box = document.querySelector('#editContactModal') as HTMLDivElement;
+    console.log(index);
     box.classList.add('flex');
     box.classList.remove('hidden');
-    this.contactToEdit.id = this.contacts[index].id; 
-    this.contactToEdit.Nom = this.contacts[index].Nom; 
-    this.contactToEdit.Prenom = this.contacts[index].Prenom; 
-    this.contactToEdit.Date_naissance = this.contacts[index].Date_naissance; 
-    this.contactToEdit.Tel = this.contacts[index].Tel; 
+    this.contacts.forEach(element => {
+      if(element.id == index){
+        this.contactToEdit.id = element.id; 
+        this.contactToEdit.Nom = element.Nom; 
+        this.contactToEdit.Prenom = element.Prenom; 
+        this.contactToEdit.Date_naissance = element.Date_naissance; 
+        this.contactToEdit.Tel = element.Tel; 
+      }
+    });
+    
     this.editIndex = index;
   }
   hidContacteModal(){
@@ -42,7 +47,7 @@ export class HomeComponent {
     box.classList.remove('flex');
   }
     saveChanges(){
-      this.contactService.updateContact(this.contactToEdit,this.editIndex + 1).subscribe((response) => {
+      this.contactService.updateContact(this.contactToEdit,this.editIndex).subscribe((response) => {
         var updateContact = new Contact();
         updateContact.id = response.contact.id;
         updateContact.Nom = response.contact.Nom;
@@ -57,4 +62,18 @@ export class HomeComponent {
         this.contactToEdit.Tel = '';
       })
     }
-}
+    deleteContact(index : number){
+      const deleteModal = document.querySelector('#delete-Contact') as HTMLDivElement;
+      this.deleteIndex = index;
+      deleteModal.classList.add('flex');
+      deleteModal.classList.remove('hidden');
+    }
+    hidDeleteModal(){
+      const box = document.querySelector('#delete-Contact') as HTMLDivElement;
+      box.classList.add('hidden');
+      box.classList.remove('flex');
+    }
+    // removeContact(i: number) {
+    //   this.deleteIndex = 
+    // }
+}   
