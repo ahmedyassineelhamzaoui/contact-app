@@ -19,6 +19,9 @@ export class ContactService {
     console.log(contact);
     return this.http.post<any>(this.apiUrl + '/createContact', contact).pipe(catchError(this.handlError));
   }
+  updateContact(editContact: Contact,index : number): Observable<any>{
+    return this.http.put<any>(this.apiUrl + `/updateContact?id=${index}`, editContact).pipe(catchError(this.handlError));
+  }
   handlError(error:HttpErrorResponse){
     let errorMessage = '';
     if(error.error instanceof ErrorEvent){
@@ -28,6 +31,5 @@ export class ContactService {
     }
     console.log(errorMessage);
     return throwError(errorMessage);
-
   }
 }

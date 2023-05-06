@@ -10,8 +10,8 @@ import { Contact } from '../contact';
 export class HomeComponent {
   Date : Date = new Date();
   contacts: any[] = [];
-  contactToEdit : Contact =new Contact(); 
-  editIndex : number | undefined;
+  contactToEdit : Contact = new Contact(); 
+  editIndex : number = -1 ;
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
@@ -41,4 +41,20 @@ export class HomeComponent {
     box.classList.add('hidden');
     box.classList.remove('flex');
   }
+    saveChanges(){
+      this.contactService.updateContact(this.contactToEdit,this.editIndex + 1).subscribe((response) => {
+        var updateContact = new Contact();
+        updateContact.id = response.contact.id;
+        updateContact.Nom = response.contact.Nom;
+        updateContact.Prenom = response.contact.Prenom;
+        updateContact.Date_naissance = response.contact.Date_naissance;
+        updateContact.Tel = response.contact.Tel;
+        this.contacts[this.editIndex] = updateContact;
+        this.contactToEdit.id = 0;
+        this.contactToEdit.Nom ='';
+        this.contactToEdit.Prenom = '';
+        this.contactToEdit.Date_naissance = new Date("1900-01-01") 
+        this.contactToEdit.Tel = '';
+      })
+    }
 }
