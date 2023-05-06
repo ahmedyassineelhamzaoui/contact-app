@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,NgZone } from '@angular/core';
 import { ContactService } from '../contact.service';
 import { Contact } from '../contact';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,7 +13,13 @@ export class HomeComponent {
   contactToEdit : Contact = new Contact(); 
   editIndex : number = -1 ;
   deleteIndex : number =-1 ;
-  constructor(private contactService: ContactService) { }
+  contactIndex : number = -1;
+  constructor(private contactService: ContactService,
+    private router:Router,
+    private ngZone: NgZone
+
+    ) {
+   }
 
   ngOnInit() {
     this.contactService.getContacts()
@@ -82,7 +88,15 @@ export class HomeComponent {
       box.classList.add('hidden');
       box.classList.remove('flex');
     }
-    // removeContact(i: number) {
-    //   this.deleteIndex = 
-    // }
+    confirmDelete() {
+      this.contacts.forEach((element,index) => {
+        if(element.id == this.deleteIndex){
+           console.log(index);
+        }
+      });
+      this.contactService.removeContact(this.deleteIndex).subscribe((response) =>{
+        this.contacts.splice(this.contactIndex,1);
+      }) 
+      this.hidDeleteModal();
+    }
 }   

@@ -16,7 +16,6 @@ export class ContactService {
     return this.http.get<any>(this.apiUrl);
   }
   addContact(contact: Contact): Observable<any> {
-    console.log(contact);
     return this.http.post<any>(this.apiUrl + '/createContact', contact).pipe(catchError(this.handlError));
   }
   updateContact(editContact: Contact,index : number): Observable<any>{
@@ -25,7 +24,7 @@ export class ContactService {
   removeContact(index:number): Observable<any>{
     return this.http.delete<any>(this.apiUrl + `/deleteContact?id=${index}`).pipe(catchError(this.handlError));
   }
-  
+
   handlError(error:HttpErrorResponse){
     let errorMessage = '';
     if(error.error instanceof ErrorEvent){
