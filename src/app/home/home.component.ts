@@ -40,6 +40,7 @@ export class HomeComponent {
     });
     
     this.editIndex = index;
+    console.log(this.editIndex);
   }
   hidContacteModal(){
     const box = document.querySelector('#editContactModal') as HTMLDivElement;
@@ -54,7 +55,15 @@ export class HomeComponent {
         updateContact.Prenom = response.contact.Prenom;
         updateContact.Date_naissance = response.contact.Date_naissance;
         updateContact.Tel = response.contact.Tel;
-        this.contacts[this.editIndex] = updateContact;
+        this.contacts.forEach(element => {
+          if(element.id == this.editIndex){
+             element.id = updateContact.id;
+             element.Nom = updateContact.Nom;
+             element.Prenom = updateContact.Prenom;
+             element.Date_naissance = updateContact.Date_naissance;
+             element.Tel = updateContact.Tel;
+          }
+        });
         this.contactToEdit.id = 0;
         this.contactToEdit.Nom ='';
         this.contactToEdit.Prenom = '';
